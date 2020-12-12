@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹出窗口居中</title>
+</head>
+<style>
+    *{margin: 0; padding: 0;}
+    #div1{
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+        position: relative;
+        display: none;
+    }
+    #close{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+</style>
+<script src='jquery-3.5.1.js'></script>
+<script>
+    $(function(){
+        var top = $(window).scrollTop() + ($(window).height() - $('#div1').outerHeight(true)) / 2;
+        var left = ($(window).width() - $('#div1').outerWidth(true)) / 2;
+
+        $('#div1').css({
+            left: left,
+            top: top
+        });
+
+        $(window).on("scroll resize", function(){
+            var top = $(window).scrollTop() + ($(window).height() - $('#div1').outerHeight(true)) / 2;
+            var left = ($(window).width() - $('#div1').outerWidth(true)) / 2;
+
+            $('#div1').css({
+                left: left,
+                top: top
+            });
+        });
+
+        $("#issue").click(function(){
+            $('#div1').css("display", "block");
+        });
+        $("#close").click(function(){
+            $('#div1').css("display", "none");
+        });
+    })
+</script>
+<body>
+    <button id="issue">open</button>
+    <div id="div1">
+        <input type="text" placeholder="Username">
+        <input type="text" placeholder="Password">
+        <div id="close">X</div>
+    </div>
+    <div style="height: 1000px;"></div>
+</body>
+</html>
