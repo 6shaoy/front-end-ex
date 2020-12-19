@@ -20,6 +20,7 @@ class TodoList extends Component {
                 <div>
                     <label htmlFor='insertArea'>输入内容: </label>
                     <input
+                        // ref={(input) => {this.input = input}}
                         id='insertArea'
                         className='input'
                         value={this.state.inputValue}
@@ -40,7 +41,7 @@ class TodoList extends Component {
         return this.state.list.map((item, index) => {
             return (
                 <TodoItem
-                    key={index} // 这里不合适，以后再改
+                    key={item}
                     content={item}
                     index={index}
                     deleteItem={this.handleItemDelete}
@@ -54,6 +55,7 @@ class TodoList extends Component {
         //     inputValue: e.target.value
         // });
         const value = e.target.value;
+        // const value = this.input.value;
         this.setState(() => ({
             inputValue: value
         }));
