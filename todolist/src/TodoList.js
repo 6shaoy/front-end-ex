@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
+import axios from 'axios';
 import './style.css';
 
 class TodoList extends Component {
@@ -35,6 +36,15 @@ class TodoList extends Component {
                 </ul>
             </Fragment>
         );
+    }
+
+    componentDidMount() {
+        axios.get('https://16e30add-29d5-43ee-9328-0ae44a565a88.mock.pstmn.io/api/todolist')
+            .then((res)=>{
+                console.log(res);
+                this.setState(()=>({ list: [...res.data] }));
+            })
+            .catch(()=>{alert('error')});
     }
 
     getTodoItem(){
