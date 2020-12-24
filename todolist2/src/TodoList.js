@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import store from './store';
-import { getInputChangeAction, getAddItemAction, getItemDeleteAction } from './store/actionCreators';
+import { getInputChangeAction, getAddItemAction, getItemDeleteAction, initListAction } from './store/actionCreators';
 import TodoListUI from './TodoListUI'
+import axios from 'axios';
 
 class TodoList extends Component {
 
@@ -24,6 +25,16 @@ class TodoList extends Component {
                     handleBtnClick={this.handleBtnClick}
                     handleItemDelete={this.handleItemDelete}
                 />
+    }
+
+    componentDidMount(){
+        axios
+            .get('https://16e30add-29d5-43ee-9328-0ae44a565a88.mock.pstmn.io/api/todolist')
+            .then((res)=>{
+                const data = res.data;
+                const action = initListAction(data);
+                store.dispatch(action);
+            })
     }
 
     handleInputChange(e) {
