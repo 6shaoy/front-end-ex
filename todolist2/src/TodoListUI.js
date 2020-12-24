@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Input, Button, List } from 'antd';
 
-class TodoListUI extends Component {
-    render() {
-        return (
+const TodoListUI = (props) => {
+    return (
             <div>
                 <div>
                     <Input
-                        value={this.props.inputValue}
+                        value={props.inputValue}
                         placeholder='todo info'
                         style={{ width: 300, marginRight: 10 }}
-                        onChange={this.props.handleInputChange}
+                        onChange={props.handleInputChange}
                     />
-                    <Button type="primary" onClick={this.props.handleBtnClick}>提交</Button>
+                    <Button type="primary" onClick={props.handleBtnClick}>提交</Button>
                 </div>
                 <List
                     style={{marginTop:10, width:300}}
                     bordered
-                    dataSource={this.props.list}
+                    dataSource={props.list}
                     renderItem={(item, index) => (
                         <List.Item
-                            onClick={(index) => {this.props.handleItemDelete(index)}}
+                            onClick={(index) => {props.handleItemDelete(index)}}
                         >
                             {item}
                         </List.Item>
@@ -28,7 +27,6 @@ class TodoListUI extends Component {
                 />
             </div>
         )
-    }
 }
 
 export default TodoListUI;
